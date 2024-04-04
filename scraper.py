@@ -13,6 +13,7 @@ def scrape_hacker_news():
             if link:
                 title = link.text
                 titles.append(title)
+        return titles
     else:
         print("Failed to retrieve page:", response.status_code)
         return []
