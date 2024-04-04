@@ -9,10 +9,8 @@ def scrape_hacker_news():
         soup = BeautifulSoup(response.text, 'html.parser')
         titles = []
         for title_elem in soup.find_all('td', class_='title'):
-            link = title_elem.find('a')
-            if link:
-                title = link.text
-                titles.append(title)
+            title = title_elem.find('a').text
+            titles.append(title)
     else:
         print("Failed to retrieve page:", response.status_code)
         return []
