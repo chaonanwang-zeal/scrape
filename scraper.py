@@ -7,7 +7,7 @@ def scrape_hacker_news():
     response = requests.get(url)
     if response.status_code == 200:
         soup = BeautifulSoup(response.text, 'html.parser')
-        titles = soup.find_all('a', class_='storylink')
+        titles = soup.find_all('a', class_='title')
         return [title.text for title in titles]
     else:
         print("Failed to retrieve page:", response.status_code)
