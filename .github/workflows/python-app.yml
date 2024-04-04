@@ -4,7 +4,7 @@ on:
   # push:
   #   branches: [main]
   schedule:
-    - cron: '30 22 * * *'
+    - cron: '35 13 * * *'  # UTC
 
 jobs:
   build:
