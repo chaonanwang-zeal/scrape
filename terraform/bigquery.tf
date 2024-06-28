@@ -16,7 +16,6 @@ resource "google_bigquery_table" "terra_table" {
       type = "INTEGER"
     }
   ])
-  deletion_protection = false  # or I can not update the date type
 }
 
 resource "google_bigquery_table" "terra_view" {
