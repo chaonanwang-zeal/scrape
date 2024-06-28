@@ -9,7 +9,7 @@ resource "google_bigquery_table" "terra_table" {
     },
     {
       name = "column2",
-      type = "INTEGER"
+      type = "STRING"
     },
     {
       name = "column3",
