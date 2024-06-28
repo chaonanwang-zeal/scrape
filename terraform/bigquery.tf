@@ -8,7 +8,7 @@ resource "google_bigquery_table" "terra_table" {
       type = "STRING"
     },
     {
-      name = "column3",
+      name = "column2",
       type = "INTEGER"
     }
   ])
