@@ -16,6 +16,8 @@ resource "google_bigquery_table" "terra_table" {
       type = "INTEGER"
     }
   ])
+
+  deletion_protection = false
 }
 
 resource "google_bigquery_table" "terra_view" {
