@@ -6,7 +6,7 @@ terraform {
     }
   }
   backend "gcs" {
-    bucket = "ou-test"
+    bucket = "oh-test"
     prefix = "terraform/state"
   }
 }
