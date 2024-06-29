@@ -14,6 +14,10 @@ resource "google_bigquery_table" "terra_table" {
     {
       name = "column3",
       type = "STRING"
+    },
+    {
+      name = "column4",
+      type = "STRING"
     }
   ])
 }
