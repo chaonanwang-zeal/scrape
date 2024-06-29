@@ -32,8 +32,8 @@ jobs:
           echo "WORKLOAD_IDENTITY_PROVIDER='projects/814992956970/locations/global/workloadIdentityPools/zdh-workflow-wi-pool/providers/github'" >> $GITHUB_ENV
           echo "SERVICE_ACCOUNT=zdh-workflow-action@bold-seat-291901.iam.gserviceaccount.com" >> $GITHUB_ENV
         elif [[ "${{ github.ref }}" == 'refs/heads/dev' ]]; then
-          echo "WORKLOAD_IDENTITY_PROVIDER='projects/[PROJECT_ID]/locations/global/workloadIdentityPools/[POOL_ID]/providers/github'" >> $GITHUB_ENV
-          echo "SERVICE_ACCOUNT=[DEV_SERVICE_ACCOUNT]@[PROJECT_ID].iam.gserviceaccount.com" >> $GITHUB_ENV
+          echo "WORKLOAD_IDENTITY_PROVIDER='projects/814992956970/locations/global/workloadIdentityPools/zdh-workflow-wi-pool/providers/github'" >> $GITHUB_ENV
+          echo "SERVICE_ACCOUNT=zdh-workflow-action@bold-seat-291901.iam.gserviceaccount.com" >> $GITHUB_ENV
         else
           echo "Unsupported branch"
           exit 1
