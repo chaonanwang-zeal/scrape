@@ -9,7 +9,7 @@ resource "google_bigquery_dataset" "account_dataset" {
 }
 
 module "accountid" {
-  source     = "../../../modules/bigquery_table"
+  source     = var.module_source
   dataset_id = google_bigquery_dataset.account_dataset.dataset_id
   table_id   = "accountid"
   schema     = jsonencode([
@@ -25,7 +25,7 @@ module "accountid" {
 }
 
 module "accountdetail" {
-  source     = "../../../modules/bigquery_table"
+  source     = var.module_source
   dataset_id = google_bigquery_dataset.account_dataset.dataset_id
   table_id   = basename(abspath(path.module))
   schema     = jsonencode([
