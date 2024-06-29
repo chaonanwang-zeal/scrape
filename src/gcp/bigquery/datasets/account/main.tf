@@ -11,29 +11,20 @@ resource "google_bigquery_dataset" "account_dataset" {
 resource "google_bigquery_table" "accountid" {
   dataset_id = google_bigquery_dataset.account_dataset.dataset_id
   table_id   = "accountid"
-  schema     = jsonencode([
-    {
-      "name": "account_id",
-      "type": "INTEGER"
-    },
-    {
-      "name": "user_id",
-      "type": "INTEGER"
-    }
-  ])
-}
-
-resource "google_bigquery_table" "accountdetail" {
-  dataset_id = google_bigquery_dataset.account_dataset.dataset_id
-  table_id   = "accountdetail"
-  schema     = jsonencode([
-    {
-      "name": "account_id",
-      "type": "INTEGER"
-    },
-    {
-      "name": "details",
-      "type": "STRING"
-    }
-  ])
+  schema = <<EOF
+[
+  {
+    "name": "permalink",
+    "type": "STRING",
+    "mode": "NULLABLE",
+    "description": "The Permalink"
+  },
+  {
+    "name": "state",
+    "type": "STRING",
+    "mode": "NULLABLE",
+    "description": "State where the head office is located"
+  }
+]
+EOF
 }
