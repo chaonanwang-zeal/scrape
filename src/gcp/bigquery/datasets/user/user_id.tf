@@ -1,5 +1,4 @@
-module "user_id" {
-  source     = "./modules/bigquery_table"
+resource "google_bigquery_table" "user_id" {
   dataset_id = google_bigquery_dataset.user_dataset.dataset_id
   table_id   = "user_id"
   schema     = jsonencode([
