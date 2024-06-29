@@ -7,6 +7,10 @@ resource "google_bigquery_table" "terra_table" {
       name = "column1",
       type = "STRING"
     }
+    {
+      name = "column2",
+      type = "STRING"
+    }
   ])
 }
 
