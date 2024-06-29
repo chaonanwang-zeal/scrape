@@ -26,24 +26,29 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
 
-    - name: Set auth variables
-      run: |
-        if [[ "${{ github.ref }}" == 'refs/heads/main' ]]; then
-          echo "WORKLOAD_IDENTITY_PROVIDER='projects/814992956970/locations/global/workloadIdentityPools/zdh-workflow-wi-pool/providers/github'" >> $GITHUB_ENV
-          echo "SERVICE_ACCOUNT=zdh-workflow-action@bold-seat-291901.iam.gserviceaccount.com" >> $GITHUB_ENV
-        elif [[ "${{ github.ref }}" == 'refs/heads/dev' ]]; then
-          echo "WORKLOAD_IDENTITY_PROVIDER='projects/814992956970/locations/global/workloadIdentityPools/zdh-workflow-wi-pool/providers/github'" >> $GITHUB_ENV
-          echo "SERVICE_ACCOUNT=zdh-workflow-action@bold-seat-291901.iam.gserviceaccount.com" >> $GITHUB_ENV
-        else
-          echo "Unsupported branch"
-          exit 1
-        fi
+    # - name: Set auth variables
+    #   run: |
+    #     if [[ "${{ github.ref }}" == 'refs/heads/main' ]]; then
+    #       echo "WORKLOAD_IDENTITY_PROVIDER='projects/814992956970/locations/global/workloadIdentityPools/zdh-workflow-wi-pool/providers/github'" >> $GITHUB_ENV
+    #       echo "SERVICE_ACCOUNT=zdh-workflow-action@bold-seat-291901.iam.gserviceaccount.com" >> $GITHUB_ENV
+    #     elif [[ "${{ github.ref }}" == 'refs/heads/dev' ]]; then
+    #       echo "WORKLOAD_IDENTITY_PROVIDER='projects/814992956970/locations/global/workloadIdentityPools/zdh-workflow-wi-pool/providers/github'" >> $GITHUB_ENV
+    #       echo "SERVICE_ACCOUNT=zdh-workflow-action@bold-seat-291901.iam.gserviceaccount.com" >> $GITHUB_ENV
+    #     else
+    #       echo "Unsupported branch"
+    #       exit 1
+    #     fi
     
+    # - name: 'auth'
+    #   uses: 'google-github-actions/auth@v1'
+    #   with:
+    #     workload_identity_provider: ${{ env.WORKLOAD_IDENTITY_PROVIDER }}
+    #     service_account: ${{ env.SERVICE_ACCOUNT }}
     - name: 'auth'
       uses: 'google-github-actions/auth@v1'
       with:
-        workload_identity_provider: ${{ env.WORKLOAD_IDENTITY_PROVIDER }}
-        service_account: ${{ env.SERVICE_ACCOUNT }}
+        workload_identity_provider: 'projects/814992956970/locations/global/workloadIdentityPools/zdh-workflow-wi-pool/providers/github'
+        service_account: zdh-workflow-action@bold-seat-291901.iam.gserviceaccount.com
     
     - name: 'Set up Cloud SDK'
       uses: 'google-github-actions/setup-gcloud@v1'
