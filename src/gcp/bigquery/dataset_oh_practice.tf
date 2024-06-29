@@ -14,7 +14,7 @@ resource "google_bigquery_table" "terra_table" {
     },
     {
       name = "column3",
-      type = "INTEGER"
+      type = "STRING"
     }
   ])
 }
