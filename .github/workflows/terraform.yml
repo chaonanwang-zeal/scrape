@@ -38,30 +38,17 @@ jobs:
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v2
 
-    - name: List Datasets
-      id: list_datasets
-      run: |
-        ls datasets > datasets_list.txt
-        cat datasets_list.txt
-
     - name: Deploy Each Dataset
       run: |
-        while read dataset; do
-          echo "Processing dataset: $dataset"
-          cd datasets/$dataset
+        echo "Initializing Terraform"
+        terraform init
     
-          echo "Initializing Terraform in $dataset"
-          terraform init || { echo "Terraform init failed for $dataset"; exit 1; }
+        echo "Checking Terraform format"
+        terraform fmt -check
     
-          echo "Checking Terraform format in $dataset"
-          terraform fmt -check || { echo "Terraform fmt check failed for $dataset"; terraform fmt; exit 1; }
+        echo "Planning Terraform changes"
+        terraform plan -var-file=environments/${{ github.ref == 'refs/heads/main' && 'production.tfvars' || 'development.tfvars' }}
     
-          echo "Planning Terraform changes for $dataset"
-          terraform plan -var-file=../environments/${{ github.ref == 'refs/heads/main' && 'production.tfvars' || 'development.tfvars' }} || { echo "Terraform plan failed for $dataset"; exit 1; }
-    
-          echo "Applying Terraform changes for $dataset"
-          terraform apply -var-file=../environments/${{ github.ref == 'refs/heads/main' && 'production.tfvars' || 'development.tfvars' }} -auto-approve || { echo "Terraform apply failed for $dataset"; exit 1; }
-    
-          cd ../
-        done < datasets_list.txt
-
+        echo "Applying Terraform changes"
+        terraform apply -var-file=environments/${{ github.ref == 'refs/heads/main' && 'production.tfvars' || 'development.tfvars' }} -auto-approve
+  
