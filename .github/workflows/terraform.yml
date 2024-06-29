@@ -1,22 +1,26 @@
-name: 'Terraform CI/CD'
+name: Terraform
+
+defaults:
+  run:
+    working-directory: ./src/gcp/bigquery
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
+      - dev
+    paths:
+      - src/gcp/bigquery/**
 
 jobs:
-  terraform:
-    name: 'Terraform'
+  deploy:
+    name: Deploy BigQuery Datasets
     runs-on: ubuntu-latest
 
     permissions:
       contents: read
       id-token: write
-
-    defaults:
-      run:
-        working-directory: ./terraform
 
     steps:
     - name: Checkout
@@ -34,15 +38,20 @@ jobs:
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v2
 
-    - name: Terraform Init
-      run: terraform init
+    - name: List Datasets
+      id: list_datasets
+      run: |
+        ls datasets > datasets_list.txt
+        cat datasets_list.txt
 
-    - name: Terraform Format
-      run: terraform fmt -check
-
-    - name: Terraform Plan
-      run: terraform plan -out=tfplan -var="project_id=bold-seat-291901" -var="region=US"
-      
-    - name: Terraform Apply
-      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-      run: terraform apply -auto-approve tfplan
+    - name: Deploy Each Dataset
+      run: |
+        while read dataset; do
+          echo "Processing dataset: $dataset"
+          cd datasets/$dataset
+          terraform init
+          terraform fmt -check
+          terraform plan -var-file=../../environments/${{ github.ref == 'refs/heads/main' && 'production.tfvars' || 'development.tfvars' }}
+          terraform apply -var-file=../../environments/${{ github.ref == 'refs/heads/main' && 'production.tfvars' || 'development.tfvars' }} -auto-approve
+          cd ../../
+        done < datasets_list.txt
