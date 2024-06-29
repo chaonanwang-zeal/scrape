@@ -25,7 +25,7 @@ resource "google_bigquery_table" "accountid" {
 
 resource "google_bigquery_table" "accountdetail" {
   dataset_id = google_bigquery_dataset.account_dataset.dataset_id
-  table_id   = basename(abspath(path.module))
+  table_id   = "accountdetail"
   schema     = jsonencode([
     {
       "name": "account_id",
