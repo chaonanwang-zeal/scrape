@@ -1,5 +1,5 @@
 module "user_id" {
-  source     = var.module_source
+  source     = "src/gcp/bigquery/modules/bigquery_table"
   dataset_id = google_bigquery_dataset.user_dataset.dataset_id
   table_id   = "user_id"
   schema     = jsonencode([
