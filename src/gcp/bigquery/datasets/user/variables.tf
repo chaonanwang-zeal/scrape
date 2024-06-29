@@ -9,5 +9,5 @@ variable "region" {
 }
 
 variable "module_source" {
-  default = "../../../modules/bigquery_table"
+  default = "src/gcp/bigquery/modules/bigquery_table"
 }
