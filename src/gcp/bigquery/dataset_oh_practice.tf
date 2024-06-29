@@ -1,4 +1,5 @@
 resource "google_bigquery_table" "terra_table" {
+  deletion_protection = False
   dataset_id = "oh_practice"
   table_id   = "terra_table"
 
@@ -9,7 +10,7 @@ resource "google_bigquery_table" "terra_table" {
     },
     {
       name = "column2",
-      type = "STRING"
+      type = "INTEGER"
     }
   ])
 }
