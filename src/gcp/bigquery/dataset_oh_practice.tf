@@ -1,5 +1,5 @@
 resource "google_bigquery_table" "terra_table" {
-  deletion_protection = false
+  deletion_protection = true
   dataset_id          = "oh_practice"
   table_id            = "terra_table"
   schema = jsonencode([
