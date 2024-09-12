@@ -1,7 +1,8 @@
 import requests
 import sys
 
-from mention_members import MENTION_MEMBERS
+from ...src.gcp.composer.mention_members import MENTION_MEMBERS
+# from mention_members import MENTION_MEMBERS
 
 
 def _prep_job_message(info, repository, commit_message, author, timestamp):
@@ -83,5 +84,3 @@ if __name__ == "__main__":
 
     # 関数実行
     notify_message(webhook_url, info, repository, commit_message, author, timestamp)
-
-
