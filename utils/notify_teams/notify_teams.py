@@ -2,7 +2,7 @@ import os
 import requests
 import sys
 
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..')))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 from src.gcp.composer.mention_members import MENTION_MEMBERS
 # from mention_members import MENTION_MEMBERS
 
