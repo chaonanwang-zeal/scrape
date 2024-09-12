@@ -1,7 +1,7 @@
 import requests
 import sys
 
-from src.gcp.composer.mention_members import MENTION_MEMBERS
+from ...src.gcp.composer.mention_members import MENTION_MEMBERS
 # from mention_members import MENTION_MEMBERS
 
 
